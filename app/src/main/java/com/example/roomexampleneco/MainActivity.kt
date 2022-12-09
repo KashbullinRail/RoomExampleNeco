@@ -16,9 +16,10 @@ class MainActivity : AppCompatActivity() {
 
         val dbRoom = MainDataBase.getDataBase(this@MainActivity)
 
-        dbRoom.getDao().getAllItem().asLiveData().observe(this){
-            it.forEach {
-                val text = "Id: ${it.id} Name: ${it.name} Price: ${it.price}\n"
+        dbRoom.getDao().getAllItem().asLiveData().observe(this){ list ->
+            binding.tvView.text = ""
+            list.forEach {
+                val text = "Id:${it.id}  Name:${it.name} Price:${it.price}\n"
                 binding.tvView.append(text)
             }
         }
